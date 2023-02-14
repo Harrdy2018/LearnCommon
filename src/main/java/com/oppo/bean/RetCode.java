@@ -3,9 +3,10 @@ package com.oppo.bean;
 import lombok.Getter;
 
 @Getter
-public enum StatusCode {
+public enum RetCode {
     // 成功状态码
     SUCCESS(200,"SUCCESS"),
+    SYSTEM_ERROR(600, "SYSTEM_ERROR"),
 
     // 参数错误 1001~1999
     PARAM_IS_INVALID(1001, "PARAM_IS_INVALID"),
@@ -25,7 +26,7 @@ public enum StatusCode {
     private Integer code;
     private String message;
 
-    StatusCode(Integer code, String message) {
+    RetCode(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

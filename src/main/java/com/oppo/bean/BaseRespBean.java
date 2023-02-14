@@ -7,46 +7,51 @@ import lombok.Setter;
 @Setter
 public class BaseRespBean<T> {
     private Integer code;
-    private String message;
+
+    private String errorMessage;
+
     private T data;
 
     public BaseRespBean() {
     }
 
-    public BaseRespBean(StatusCode resultCode, T data) {
-        this.code = resultCode.getCode();
-        this.message = resultCode.getMessage();
+    /**
+     * 成功构造器
+     *
+     * @param code code
+     * @param data data
+     */
+    public BaseRespBean(Integer code, T data) {
+        this.code = code;
         this.data = data;
     }
 
-    public static BaseRespBean success() {
-        BaseRespBean baseRespBean = new BaseRespBean();
-        baseRespBean.setStatusCode(StatusCode.SUCCESS);
-        return baseRespBean;
+    /**
+     * 失败构造器
+     * @param code code
+     * @param errorMessage errorMessage
+     */
+    public BaseRespBean(Integer code, String errorMessage) {
+        this.code = code;
+        this.errorMessage = errorMessage;
+    }
+
+    /**
+     * 失败构造器
+     * @param code code
+     * @param errorMessage errorMessage
+     * @param data data
+     */
+    public BaseRespBean(Integer code, String errorMessage, T data) {
+        this.code = code;
+        this.errorMessage = errorMessage;
+        this.data = data;
     }
 
     public static <T> BaseRespBean success(T data) {
         BaseRespBean baseRespBean = new BaseRespBean();
-        baseRespBean.setStatusCode(StatusCode.SUCCESS);
+        baseRespBean.setCode(RetCode.SUCCESS.getCode());
         baseRespBean.setData(data);
         return baseRespBean;
-    }
-
-    public static BaseRespBean failure(StatusCode statusCode) {
-        BaseRespBean baseRespBean = new BaseRespBean();
-        baseRespBean.setStatusCode(statusCode);
-        return baseRespBean;
-    }
-
-    public static <T> BaseRespBean failure(StatusCode statusCode, T data) {
-        BaseRespBean baseRespBean = new BaseRespBean();
-        baseRespBean.setStatusCode(statusCode);
-        baseRespBean.setData(data);
-        return baseRespBean;
-    }
-
-    public void setStatusCode(StatusCode statusCode) {
-        this.code = statusCode.getCode();
-        this.message = statusCode.getMessage();
     }
 }

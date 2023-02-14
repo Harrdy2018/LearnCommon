@@ -1,5 +1,10 @@
 package com.oppo.exception;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class BusinessException extends RuntimeException{
     /**
      * code
